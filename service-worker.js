@@ -13,13 +13,7 @@ self.addEventListener('install', event => {
   );
   self.skipWaiting();
 });
-
-self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
-});
-
+self.addEventListener('activate', event => { event.waitUntil(self.clients.claim()); });
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
-  );
+  event.respondWith(caches.match(event.request).then(r => r || fetch(event.request)));
 });

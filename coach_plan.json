@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2025-08-13T21:32:00.685929",
+  "generated_at": "2025-08-13T21:40:47.328083",
   "identity": {
     "statement": "I am a man who chooses connection with my wife over pixels.",
     "why": [
@@ -60,9 +60,9 @@
     ],
     "approach": [
       "No fetish content for the 30-day reboot.",
-      "Week 2+: Gradually shift arousal focus to real-life connection (sensate focus exercises, eye contact, breathing).",
+      "Week 2+: Shift arousal to real-life connection (sensate focus, eye contact, breathing).",
       "Thought labeling: when fetish images arise, label 'old loop' and redirect to breath + 5 senses.",
-      "If needed, exposure hierarchy later (safe, consent-based, non-objectifying cues)."
+      "If needed later, exposure hierarchy (safe, consent-based, non-objectifying cues)."
     ]
   },
   "environment": {
@@ -76,7 +76,7 @@
     ],
     "schedule_guards": [
       "Plan out-of-home work blocks on Thursdays when alone.",
-      "Gym in late afternoon/early evening to reduce night-time energy spikes."
+      "Gym late afternoon/early evening to reduce night-time energy spikes."
     ]
   },
   "daily_protocol": {
@@ -91,13 +91,13 @@
       "Laptop away at 11:00 pm; phone docked outside bedroom/bathroom."
     ],
     "urge_playbook": [
-      "Notice \u2192 Name the trigger \u2192 Do a 2-minute interrupt (push-ups/cold water/walk) \u2192 Log urge.",
-      "If urge persists: leave room, change posture, water + chew gum, text spouse or coach message draft (not sent)."
+      "Notice \u2192 Name the trigger \u2192 2-min interrupt (push-ups/cold water/walk) \u2192 Log urge.",
+      "If still strong: leave room, change posture, water + chew gum, text spouse or coach draft (not sent)."
     ]
   },
   "metrics": {
     "track": [
-      "Urges per day + intensity",
+      "Urges/day + intensity",
       "Porn/cam events (target zero post\u2013Sep 5)",
       "Gaming minutes (target zero for 30 days)",
       "Weed/shisha use",
@@ -111,13 +111,13 @@
   },
   "weekly_review": [
     "Identify top 2 triggers; design counter-moves for next week.",
-    "Reinforce wins and refine device/schedule rules.",
-    "Adjust weed reduction plan if it\u2019s acting as a gateway."
+    "Refine device/schedule rules.",
+    "Adjust weed reduction if it's acting as a gateway."
   ],
   "relapse_plan": [
     "Interrupt immediately (cold water, push-ups, leave room).",
     "Log what happened (trigger, time, device).",
-    "Review blockers/curfews and add friction.",
+    "Tighten blockers/curfews and add friction.",
     "Recommit to next action (not next week)."
   ]
 }

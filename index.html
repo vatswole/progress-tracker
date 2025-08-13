@@ -15,13 +15,13 @@
 <header>
   <h1>Progress Tracker</h1>
   <nav>
-    <button data-tab="log">Log</button>
-    <button data-tab="urges">Urges</button>
-    <button data-tab="review">Daily Review</button>
-    <button data-tab="trends">Trends</button>
-    <button data-tab="timer">Urge Timer</button>
-    <button data-tab="gameplan">Game Plan</button>
-    <button data-tab="settings">Settings</button>
+    <button type="button" data-tab="log">Log</button>
+    <button type="button" data-tab="urges">Urges</button>
+    <button type="button" data-tab="review">Daily Review</button>
+    <button type="button" data-tab="trends">Trends</button>
+    <button type="button" data-tab="gameplan">Game Plan</button>
+    <button type="button" data-tab="timer">Urge Timer</button>
+    <button type="button" data-tab="settings">Settings</button>
   </nav>
 </header>
 
@@ -147,7 +147,7 @@
     <div id="last7" class="card-list"></div>
 
     <div class="row export-row">
-      <button id="export-btn">Export coach_sync.json</button>
+      <button id="export-btn" type="button">Export coach_sync.json</button>
       <label class="import">
         Import coach_plan.json
         <input type="file" id="import-file" accept=".json">
@@ -163,42 +163,38 @@
     <p class="muted">Log a few days to see trends.</p>
   </section>
 
-  <!-- Urge Timer Tab -->
-  <section id="tab-timer" class="tab">
-    <h2>Urge Interrupt Timer</h2>
-    <div class="card">
-      <div id="timer-display" class="timer">02:00</div>
-      <div class="row">
-        <button id="btn-2">Start 2 min</button>
-        <button id="btn-5">Start 5 min</button>
-        <button id="btn-10">Start 10 min</button>
-      </div>
-      <div class="row">
-        <label>Intensity (1–10)
-          <input type="number" id="urge-intensity" min="1" max="10" value="6">
-        </label>
-        <label>Trigger
-          <input type="text" id="urge-trigger" placeholder="bathroom, bored, alone, weed">
-        </label>
-      </div>
-      <div id="script" class="script"></div>
-      <div class="row">
-        <button id="mark-resisted">I rode the urge ✅</button>
-        <button id="mark-slipped">I slipped — log it 🧭</button>
-      </div>
-      <small class="muted">This timer helps the urge pass without acting. We’ll log the attempt so your streak and trends stay honest.</small>
-    </div>
-  </section>
-
   <!-- Game Plan Tab -->
   <section id="tab-gameplan" class="tab">
     <h2>Game Plan</h2>
     <div id="gameplan"></div>
   </section>
 
+  <!-- Urge Timer Tab -->
+  <section id="tab-timer" class="tab">
+    <h2>Urge Timer</h2>
+    <div class="row">
+      <button type="button" data-min="2" class="pill-btn">2 min</button>
+      <button type="button" data-min="5" class="pill-btn">5 min</button>
+      <button type="button" data-min="10" class="pill-btn">10 min</button>
+    </div>
+    <label>Trigger (optional)
+      <input type="text" id="timer-trigger" placeholder="bathroom, alone, weed">
+    </label>
+    <label>Intensity (1–10)
+      <input type="number" id="timer-intensity" min="1" max="10" value="6">
+    </label>
+    <div id="timer-display" class="card"><strong>Ready.</strong> Pick a duration to begin.</div>
+    <div id="timer-prompts" class="card"></div>
+    <div class="row">
+      <button type="button" id="timer-success">I rode the urge ✅</button>
+      <button type="button" id="timer-slip">I slipped — log it 🧭</button>
+    </div>
+  </section>
+
   <!-- Settings Tab -->
   <section id="tab-settings" class="tab">
     <h2>Settings</h2>
+    <p>This app runs offline on your phone and saves data locally. Add it to your Home Screen from Safari for a full-screen experience.</p>
     <h3>Coach Plan (raw)</h3>
     <pre id="coach-plan">No coach plan imported yet.</pre>
   </section>

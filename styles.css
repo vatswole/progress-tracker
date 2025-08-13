@@ -23,6 +23,6 @@ label.import{display:inline-flex;gap:8px;align-items:center;border:1px dashed #3
 .muted{color:#94a3b8}
 #gameplan h3{margin-top:16px}
 #gameplan ul{margin:8px 0 12px 18px}
-#gameplan .pill{display:inline-block;padding:4px 8px;border:1px solid #334155;border-radius:999px;margin:4px 6px 0 0;background:#0f172a;color:#e5e7eb;font-size:12px}
-.timer{font-size:42px;text-align:center;margin:8px 0 12px}
-.script{white-space:pre-wrap;line-height:1.5;border:1px solid #334155;border-radius:12px;padding:12px;background:#0b1220;margin-top:8px}
+.pill{display:inline-block;padding:4px 8px;border:1px solid #334155;border-radius:999px;margin:4px 6px 0 0;background:#0f172a;color:#e5e7eb;font-size:12px}
+.pill-btn{background:#0f172a;border-color:#334155}
+#timer-display{font-size:18px}
