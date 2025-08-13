@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>Progress Tracker — PWA</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/idb.min.js"></script>
+  
+  <script defer src="app.js"></script>
+</head>
+<body>
+<header>
+  <h1>Progress Tracker</h1>
+  <nav>
+    <button data-tab="log">Log</button>
+    <button data-tab="urges">Urges</button>
+    <button data-tab="review">Daily Review</button>
+    <button data-tab="trends">Trends</button>
+    <button data-tab="settings">Settings</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Log Tab -->
+  <section id="tab-log" class="tab active">
+    <h2>Quick Habit Log</h2>
+    <form id="log-form">
+      <label>Habit
+        <select name="habit" required>
+          <option value="porn">porn</option>
+          <option value="cam">cam</option>
+          <option value="gaming">gaming</option>
+          <option value="weed">weed</option>
+          <option value="shisha">shisha</option>
+        </select>
+      </label>
+      <div class="row">
+        <label>Start
+          <input type="time" name="start_time">
+        </label>
+        <label>End
+          <input type="time" name="end_time">
+        </label>
+      </div>
+      <div class="row">
+        <label>Duration (min)
+          <input type="number" name="duration_min" min="0" inputmode="numeric">
+        </label>
+        <label>Intensity (1–10)
+          <input type="number" name="intensity" min="1" max="10" value="5" inputmode="numeric">
+        </label>
+      </div>
+      <label>Trigger
+        <input type="text" name="trigger" placeholder="bored, bathroom, alone, weed, night">
+      </label>
+      <label>Context
+        <input type="text" name="context" placeholder="Thurs alone, wife asleep">
+      </label>
+      <div class="row">
+        <label>Location
+          <input type="text" name="location" placeholder="bathroom, office, living room">
+        </label>
+        <label>Device
+          <input type="text" name="device" placeholder="phone, laptop">
+        </label>
+      </div>
+      <label class="checkbox">
+        <input type="checkbox" name="acted" checked> I acted on it (unchecked = urge only)
+      </label>
+      <label>Notes
+        <textarea name="notes" rows="3"></textarea>
+      </label>
+      <button type="submit">Save log</button>
+    </form>
+    <h3>Today</h3>
+    <div id="today-logs" class="card-list"></div>
+  </section>
+
+  <!-- Urges Tab -->
+  <section id="tab-urges" class="tab">
+    <h2>Record an Urge</h2>
+    <form id="urge-form">
+      <div class="row">
+        <label>Time
+          <input type="time" name="time">
+        </label>
+        <label>Intensity (1–10)
+          <input type="number" name="intensity" min="1" max="10" value="6" inputmode="numeric">
+        </label>
+      </div>
+      <label>Trigger
+        <input type="text" name="trigger" placeholder="phone in bathroom, boredom">
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="resisted" checked> I resisted
+      </label>
+      <label>What helped?
+        <input type="text" name="method" placeholder="push-ups, cold shower, walk">
+      </label>
+      <label>Minutes the urge lasted
+        <input type="number" name="minutes" min="0" value="2" inputmode="numeric">
+      </label>
+      <label>Notes
+        <textarea name="notes" rows="3"></textarea>
+      </label>
+      <button type="submit">Save urge</button>
+    </form>
+    <h3>Today</h3>
+    <div id="today-urges" class="card-list"></div>
+  </section>
+
+  <!-- Daily Review Tab -->
+  <section id="tab-review" class="tab">
+    <h2>Daily Review</h2>
+    <form id="daily-form">
+      <div class="row">
+        <label>Sleep (h)
+          <input type="number" name="sleep_hours" min="0" step="0.5" value="7">
+        </label>
+        <label>Energy (1–10)
+          <input type="number" name="energy" min="1" max="10" value="6">
+        </label>
+      </div>
+      <div class="row">
+        <label>Mood (1–10)
+          <input type="number" name="mood" min="1" max="10" value="6">
+        </label>
+        <label>Workouts (count)
+          <input type="number" name="workouts" min="0" value="0">
+        </label>
+      </div>
+      <label>Wins
+        <textarea name="wins" rows="3"></textarea>
+      </label>
+      <label>Slips
+        <textarea name="slips" rows="3"></textarea>
+      </label>
+      <button type="submit">Save review</button>
+    </form>
+
+    <h3>Last 7 days</h3>
+    <div id="last7" class="card-list"></div>
+
+    <div class="row export-row">
+      <button id="export-btn">Export coach_sync.json</button>
+      <label class="import">
+        Import coach_plan.json
+        <input type="file" id="import-file" accept=".json">
+      </label>
+    </div>
+    <div id="import-status"></div>
+  </section>
+
+  <!-- Trends Tab -->
+  <section id="tab-trends" class="tab">
+    <h2>Trends (last 14 days)</h2>
+    <canvas id="chart" width="400" height="300" aria-label="Trends chart"></canvas>
+    <p class="muted">Log a few days to see trends.</p>
+  </section>
+
+  <!-- Settings Tab -->
+  <section id="tab-settings" class="tab">
+    <h2>Settings</h2>
+    <p>This app runs offline on your phone and saves data locally. Add it to your Home Screen from Safari for a full-screen experience.</p>
+    <h3>Coach Plan</h3>
+    <pre id="coach-plan">No coach plan imported yet.</pre>
+  </section>
+</main>
+
+<footer>
+  <small>v1 • Offline-ready PWA • Data stored locally</small>
+</footer>
+</body>
+</html>
