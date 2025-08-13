@@ -19,6 +19,7 @@
     <button data-tab="urges">Urges</button>
     <button data-tab="review">Daily Review</button>
     <button data-tab="trends">Trends</button>
+    <button data-tab="timer">Urge Timer</button>
     <button data-tab="gameplan">Game Plan</button>
     <button data-tab="settings">Settings</button>
   </nav>
@@ -162,6 +163,33 @@
     <p class="muted">Log a few days to see trends.</p>
   </section>
 
+  <!-- Urge Timer Tab -->
+  <section id="tab-timer" class="tab">
+    <h2>Urge Interrupt Timer</h2>
+    <div class="card">
+      <div id="timer-display" class="timer">02:00</div>
+      <div class="row">
+        <button id="btn-2">Start 2 min</button>
+        <button id="btn-5">Start 5 min</button>
+        <button id="btn-10">Start 10 min</button>
+      </div>
+      <div class="row">
+        <label>Intensity (1–10)
+          <input type="number" id="urge-intensity" min="1" max="10" value="6">
+        </label>
+        <label>Trigger
+          <input type="text" id="urge-trigger" placeholder="bathroom, bored, alone, weed">
+        </label>
+      </div>
+      <div id="script" class="script"></div>
+      <div class="row">
+        <button id="mark-resisted">I rode the urge ✅</button>
+        <button id="mark-slipped">I slipped — log it 🧭</button>
+      </div>
+      <small class="muted">This timer helps the urge pass without acting. We’ll log the attempt so your streak and trends stay honest.</small>
+    </div>
+  </section>
+
   <!-- Game Plan Tab -->
   <section id="tab-gameplan" class="tab">
     <h2>Game Plan</h2>
@@ -171,7 +199,6 @@
   <!-- Settings Tab -->
   <section id="tab-settings" class="tab">
     <h2>Settings</h2>
-    <p>This app runs offline on your phone and saves data locally. Add it to your Home Screen from Safari for a full-screen experience.</p>
     <h3>Coach Plan (raw)</h3>
     <pre id="coach-plan">No coach plan imported yet.</pre>
   </section>

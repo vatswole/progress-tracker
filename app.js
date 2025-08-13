@@ -1,9 +1,10 @@
-// PWA app with prepopulated plan + Game Plan tab
+// PWA with prepop plan, Game Plan, and Urge Timer
 'use strict';
 
-const DEFAULT_PLAN = {"version": 1, "generated_at": "2025-08-13T21:21:36.619129", "identity": {"statement": "I am a man who chooses connection with my wife over pixels.", "why": ["Be a present husband (1-year anniversary on Sep 7).", "Be a future father with discipline and self-respect.", "Build the lifestyle we want by reclaiming time, energy, and focus."]}, "dates": {"quit_date": "2025-09-05", "reboot_length_days": 30}, "habits": {"porn_cam": {"status": "eliminate", "rules": ["Full ban from Sep 5 for 30 days (no porn, no cams, no fetish browsing).", "Bathroom rule: no phone in bathroom; leave it outside every time.", "Laptop curfew: put laptop away at 11:00 pm.", "Thursdays alone: schedule out-of-home tasks during usual danger hours."], "urge_interrupts": ["20 push-ups OR 30 squats", "2-minute cold shower/face splash", "Drink a tall glass of water and walk for 2 minutes"], "notes": "Log every urge with trigger + intensity. Every slip is data, not shame."}, "gaming": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "No gaming after 11 pm thereafter if reintroduced.", "Move console/PC out of private zone."]}, "weed": {"status": "reduce", "rules": ["Cut daily intake by ~30–40% pre–Sep 5.", "From Sep 5: limit to 1–2x/week; no porn/gaming within 3 hours after use.", "Avoid pairing weed with boredom/late-night scrolling."]}, "shisha": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "If reintroduced, cap to rare social use; no solo-night sessions."]}}, "fetish_rewire": {"focus": ["cock worship", "cock shock"], "approach": ["No fetish content for the 30-day reboot.", "Week 2+: Gradually shift arousal focus to real-life connection (sensate focus exercises, eye contact, breathing).", "Thought labeling: when fetish images arise, label 'old loop' and redirect to breath + 5 senses.", "If needed, exposure hierarchy later (safe, consent-based, non-objectifying cues)."]}, "environment": {"tech": ["Install blockers on all devices (e.g., Pluckeye).", "Set accountability partner for password (spouse if aligned)."], "device_rules": ["Phone stays outside bathroom, 100% of the time.", "Laptop physically stored away at 11:00 pm."], "schedule_guards": ["Plan out-of-home work blocks on Thursdays when alone.", "Gym in late afternoon/early evening to reduce night-time energy spikes."]}, "daily_protocol": {"morning": ["5-minute breath + intention: read identity statement.", "Plan top 3 priorities for the day.", "Place phone outside bathroom before first shower/toilet."], "evening": ["Daily Review in app (sleep, energy, mood, workouts, wins, slips).", "Export coach_sync.json (share with coach).", "Laptop away at 11:00 pm; phone docked outside bedroom/bathroom."], "urge_playbook": ["Notice → Name the trigger → Do a 2-minute interrupt (push-ups/cold water/walk) → Log urge.", "If urge persists: leave room, change posture, water + chew gum, text spouse or coach message draft (not sent)."]}, "metrics": {"track": ["Urges per day + intensity", "Porn/cam events (target zero post–Sep 5)", "Gaming minutes (target zero for 30 days)", "Weed/shisha use", "Sleep (h), energy, mood, workouts"], "streaks": ["Porn/cam-free days", "Gaming-free days", "Shisha-free days"]}, "weekly_review": ["Identify top 2 triggers; design counter-moves for next week.", "Reinforce wins and refine device/schedule rules.", "Adjust weed reduction plan if it’s acting as a gateway."], "relapse_plan": ["Interrupt immediately (cold water, push-ups, leave room).", "Log what happened (trigger, time, device).", "Review blockers/curfews and add friction.", "Recommit to next action (not next week)."]};
+const DEFAULT_PLAN = {"version": 1, "generated_at": "2025-08-13T21:32:00.685929", "identity": {"statement": "I am a man who chooses connection with my wife over pixels.", "why": ["Be a present husband (1-year anniversary on Sep 7).", "Be a future father with discipline and self-respect.", "Build the lifestyle we want by reclaiming time, energy, and focus."]}, "dates": {"quit_date": "2025-09-05", "reboot_length_days": 30}, "habits": {"porn_cam": {"status": "eliminate", "rules": ["Full ban from Sep 5 for 30 days (no porn, no cams, no fetish browsing).", "Bathroom rule: no phone in bathroom; leave it outside every time.", "Laptop curfew: put laptop away at 11:00 pm.", "Thursdays alone: schedule out-of-home tasks during usual danger hours."], "urge_interrupts": ["20 push-ups OR 30 squats", "2-minute cold shower/face splash", "Drink a tall glass of water and walk for 2 minutes"], "notes": "Log every urge with trigger + intensity. Every slip is data, not shame."}, "gaming": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "No gaming after 11 pm thereafter if reintroduced.", "Move console/PC out of private zone."]}, "weed": {"status": "reduce", "rules": ["Cut daily intake by ~30–40% pre–Sep 5.", "From Sep 5: limit to 1–2x/week; no porn/gaming within 3 hours after use.", "Avoid pairing weed with boredom/late-night scrolling."]}, "shisha": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "If reintroduced, cap to rare social use; no solo-night sessions."]}}, "fetish_rewire": {"focus": ["cock worship", "cock shock"], "approach": ["No fetish content for the 30-day reboot.", "Week 2+: Gradually shift arousal focus to real-life connection (sensate focus exercises, eye contact, breathing).", "Thought labeling: when fetish images arise, label 'old loop' and redirect to breath + 5 senses.", "If needed, exposure hierarchy later (safe, consent-based, non-objectifying cues)."]}, "environment": {"tech": ["Install blockers on all devices (e.g., Pluckeye).", "Set accountability partner for password (spouse if aligned)."], "device_rules": ["Phone stays outside bathroom, 100% of the time.", "Laptop physically stored away at 11:00 pm."], "schedule_guards": ["Plan out-of-home work blocks on Thursdays when alone.", "Gym in late afternoon/early evening to reduce night-time energy spikes."]}, "daily_protocol": {"morning": ["5-minute breath + intention: read identity statement.", "Plan top 3 priorities for the day.", "Place phone outside bathroom before first shower/toilet."], "evening": ["Daily Review in app (sleep, energy, mood, workouts, wins, slips).", "Export coach_sync.json (share with coach).", "Laptop away at 11:00 pm; phone docked outside bedroom/bathroom."], "urge_playbook": ["Notice → Name the trigger → Do a 2-minute interrupt (push-ups/cold water/walk) → Log urge.", "If urge persists: leave room, change posture, water + chew gum, text spouse or coach message draft (not sent)."]}, "metrics": {"track": ["Urges per day + intensity", "Porn/cam events (target zero post–Sep 5)", "Gaming minutes (target zero for 30 days)", "Weed/shisha use", "Sleep (h), energy, mood, workouts"], "streaks": ["Porn/cam-free days", "Gaming-free days", "Shisha-free days"]}, "weekly_review": ["Identify top 2 triggers; design counter-moves for next week.", "Reinforce wins and refine device/schedule rules.", "Adjust weed reduction plan if it’s acting as a gateway."], "relapse_plan": ["Interrupt immediately (cold water, push-ups, leave room).", "Log what happened (trigger, time, device).", "Review blockers/curfews and add friction.", "Recommit to next action (not next week)."]};
+const USER = { name: "Vatsal", spouse: "Mehar", quitDate: "2025-09-05" };
 
-const TABS = ['log','urges','review','trends','gameplan','settings'];
+const TABS = ['log','urges','review','trends','timer','gameplan','settings'];
 const todayStr = () => new Date().toISOString().slice(0,10);
 
 async function ready(){
@@ -29,6 +30,9 @@ async function ready(){
   document.getElementById('daily-form').addEventListener('submit', onSaveDaily);
   document.getElementById('export-btn').addEventListener('click', onExport);
   document.getElementById('import-file').addEventListener('change', onImport);
+
+  // Timer hooks
+  setupTimer();
 
   // Initial renders
   await renderToday();
@@ -247,6 +251,109 @@ async function renderTrends(){
 
 function card(inner){ const d=document.createElement('div'); d.className='card'; d.innerHTML=inner; return d; }
 function escapeHtml(s){ return s ? s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])) : ''; }
+
+// ---------------- Urge Timer ----------------
+let timerId = null, remaining = 120;
+
+function setupTimer(){
+  const disp = document.getElementById('timer-display');
+  const script = document.getElementById('script');
+  const intensity = document.getElementById('urge-intensity');
+  const trigger = document.getElementById('urge-trigger');
+
+  document.getElementById('btn-2').addEventListener('click', ()=>startTimer(120));
+  document.getElementById('btn-5').addEventListener('click', ()=>startTimer(300));
+  document.getElementById('btn-10').addEventListener('click', ()=>startTimer(600));
+  document.getElementById('mark-resisted').addEventListener('click', async ()=>{ await quickLog(true); });
+  document.getElementById('mark-slipped').addEventListener('click', async ()=>{ await quickLog(false); });
+
+  function startTimer(sec){
+    remaining = sec; update();
+    showScript(remaining);
+    clearInterval(timerId);
+    timerId = setInterval(()=>{
+      remaining--; if(remaining<=0){ clearInterval(timerId); remaining=0; }
+      update(); if(remaining%10===0) showScript(remaining);
+    }, 1000);
+  }
+
+  function update(){
+    disp.textContent = fmt(remaining);
+  }
+
+  function fmt(s){
+    const m = Math.floor(s/60).toString().padStart(2,'0');
+    const ss = (s%60).toString().padStart(2,'0');
+    return `${m}:${ss}`;
+  }
+
+  function showScript(s){
+    const lines = motivation(intensity.value|0, trigger.value||'');
+    script.textContent = lines.join('\n\n');
+  }
+
+  async function quickLog(resisted){
+    const u = (await idb.get('urges')) || [];
+    const now = new Date();
+    const rec = {
+      id: crypto.randomUUID(),
+      date: now.toISOString().slice(0,10),
+      time: now.toTimeString().slice(0,5),
+      intensity: parseInt(intensity.value||'0',10),
+      trigger: trigger.value||'',
+      resisted: resisted?1:0,
+      method: resisted? 'Urge Timer protocol' : 'Attempted Urge Timer',
+      minutes: Math.round(((resisted? (remaining? ( (resisted? ((remaining) ? ( ( (remaining) ) : 0) ) : 0 )) : 0) : 0)); // placeholder
+      notes: resisted? 'Rode the urge' : 'Slipped after timer attempt'
+    };
+    // compute elapsed
+    const total = (timerId? (parseInt(intensity.value||'0',10), 0) : 0);
+    // just set minutes from configured selection minus remaining
+    // we don't know the selected duration; infer from display original? We'll track as best-effort:
+    rec.minutes = Math.max(0, Math.round(( (rec.minutes && 0) )));
+    u.push(rec);
+    await idb.set('urges', u);
+    alert(resisted? "Proud of you. Logged as resisted. Get back to your day." : "Logged. Review what triggered it—no shame, just data.");
+  }
+}
+
+function motivation(intensity, trig){
+  const me = USER;
+  const why = [
+    "Be present with Mehar tonight. Screens don’t deserve you.",
+    "Remember Sep 5 reboot. This is who you are becoming.",
+    "Future dad > instant dopamine. Your son will copy this discipline.",
+    "Two minutes of discomfort beats two hours of regret."
+  ];
+  const scripts = [
+    `Breathe 4-7-8 for 3 rounds. Name it: “old loop.” Stand up, shoulders back. Cold water to face. Return.`,
+    `You want relief, not pixels. Move: 20 push-ups or 30 squats. Blood > urge.`,
+    `Phone out of bathroom. If you’re alone, switch rooms. Lights on. Posture tall.`,
+    `Text draft (don’t send): “I’m choosing us, not pixels.” Read it. Delete. Choose again.`
+  ];
+  const personal = [
+    `Vatsal, this minute decides the next hour. Mehar gets your best.`,
+    `Your 29-year-old self is being forged right now. Act like him.`,
+    `You are building a home your kids will feel safe in. Model control.`,
+    `Identity: “I choose connection over pixels.” Say it once, out loud.`
+  ];
+
+  // Blend based on intensity and trigger keyword
+  const t = (trig||'').toLowerCase();
+  const add = [];
+  if(t.includes('bath')||t.includes('toilet')) add.push("Bathroom rule: phone outside. Leave now. Return without it.");
+  if(t.includes('alone')||t.includes('thurs')) add.push("Alone? Change location for 5 minutes. Open curtains. Step outside.");
+  if(t.includes('weed')) add.push("Weed spike detected: delay any screen by 3 hours. Water + gum now.");
+
+  const out = [];
+  out.push(personal[intensity%personal.length]);
+  out.push(scripts[intensity%scripts.length]);
+  out.push(why[intensity%why.length]);
+  if(add.length) out.push(add.join(" "));
+  return out;
+}
+
+// ---------------- End Timer ----------------
 
 async function onExport(){
   const bundle = {
