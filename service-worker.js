@@ -7,7 +7,6 @@ self.addEventListener('install', event => {
       './app.js',
       './manifest.webmanifest',
       './vendor/idb.min.js',
-      './vendor/chart.min.js',
       './icons/icon-192.png',
       './icons/icon-512.png'
     ]))

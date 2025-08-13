@@ -1,6 +1,8 @@
 // Minimal PWA app with IndexedDB storage via idb helper
 'use strict';
 
+const DEFAULT_PLAN = {"version": 1, "generated_at": "2025-08-13T21:14:25.999067", "identity": {"statement": "I am a man who chooses connection with my wife over pixels.", "why": ["Be a present husband (1-year anniversary on Sep 7).", "Be a future father with discipline and self-respect.", "Build the lifestyle we want by reclaiming time, energy, and focus."]}, "dates": {"quit_date": "2025-09-05", "reboot_length_days": 30}, "habits": {"porn_cam": {"status": "eliminate", "rules": ["Full ban from Sep 5 for 30 days (no porn, no cams, no fetish browsing).", "Bathroom rule: no phone in bathroom; leave it outside every time.", "Laptop curfew: put laptop away at 11:00 pm.", "Thursdays alone: schedule out-of-home tasks during usual danger hours."], "urge_interrupts": ["20 push-ups OR 30 squats", "2-minute cold shower/face splash", "Drink a tall glass of water and walk for 2 minutes"], "notes": "Log every urge with trigger + intensity. Every slip is data, not shame."}, "gaming": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "No gaming after 11 pm thereafter if reintroduced.", "Move console/PC out of private zone."]}, "weed": {"status": "reduce", "rules": ["Cut daily intake by ~30–40% pre–Sep 5.", "From Sep 5: limit to 1–2x/week; no porn/gaming within 3 hours after use.", "Avoid pairing weed with boredom/late-night scrolling."]}, "shisha": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "If reintroduced, cap to rare social use; no solo-night sessions."]}}, "fetish_rewire": {"focus": ["cock worship", "cock shock"], "approach": ["No fetish content for the 30-day reboot.", "Week 2+: Gradually shift arousal focus to real-life connection (sensate focus exercises, eye contact, breathing).", "Thought labeling: when fetish images arise, label 'old loop' and redirect to breath + 5 senses.", "If needed, exposure hierarchy later (safe, consent-based, non-objectifying cues)."]}, "environment": {"tech": ["Install blockers on all devices (e.g., Pluckeye).", "Set accountability partner for password (spouse if aligned)."], "device_rules": ["Phone stays outside bathroom, 100% of the time.", "Laptop physically stored away at 11:00 pm."], "schedule_guards": ["Plan out-of-home work blocks on Thursdays when alone.", "Gym in late afternoon/early evening to reduce night-time energy spikes."]}, "daily_protocol": {"morning": ["5-minute breath + intention: read identity statement.", "Plan top 3 priorities for the day.", "Place phone outside bathroom before first shower/toilet."], "evening": ["Daily Review in app (sleep, energy, mood, workouts, wins, slips).", "Export coach_sync.json (share with coach).", "Laptop away at 11:00 pm; phone docked outside bedroom/bathroom."], "urge_playbook": ["Notice → Name the trigger → Do a 2-minute interrupt (push-ups/cold water/walk) → Log urge.", "If urge persists: leave room, change posture, water + chew gum, text spouse or coach message draft (not sent)."]}, "metrics": {"track": ["Urges per day + intensity", "Porn/cam events (target zero post–Sep 5)", "Gaming minutes (target zero for 30 days)", "Weed/shisha use", "Sleep (h), energy, mood, workouts"], "streaks": ["Porn/cam-free days", "Gaming-free days", "Shisha-free days"]}, "weekly_review": ["Identify top 2 triggers; design counter-moves for next week.", "Reinforce wins and refine device/schedule rules.", "Adjust weed reduction plan if it’s acting as a gateway."], "relapse_plan": ["Interrupt immediately (cold water, push-ups, leave room).", "Log what happened (trigger, time, device).", "Review blockers/curfews and add friction.", "Recommit to next action (not next week)."]};
+
 const TABS = ['log','urges','review','trends','settings'];
 const todayStr = () => new Date().toISOString().slice(0,10);
 
@@ -8,6 +10,12 @@ async function ready(){
   // PWA: register service worker
   if ('serviceWorker' in navigator) {
     try { await navigator.serviceWorker.register('service-worker.js'); } catch(e){}
+  }
+
+  // Seed coach plan if none exists
+  const hasPlan = await idb.get('coach_plan');
+  if(!hasPlan) {
+    await idb.set('coach_plan', DEFAULT_PLAN);
   }
 
   // tab nav
@@ -146,13 +154,13 @@ async function renderTrends(){
     days.push(d.toISOString().slice(0,10));
   }
   const habits = ['porn','cam','gaming','weed','shisha'];
-  const counts = {};
+  const counts = {}
   habits.forEach(h=>counts[h]=days.map(()=>0));
   logs.forEach(x=>{
     const idx = days.indexOf(x.date);
     if(idx>=0 && counts[x.habit]!=null){ counts[x.habit][idx] += 1; }
   });
-  // simple SVG line chart
+  // simple SVG-like line chart on canvas
   const canvas = document.getElementById('chart');
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -167,7 +175,7 @@ async function renderTrends(){
   habits.forEach((h,hi)=>{
     ctx.beginPath();
     ctx.strokeStyle = colors[hi%colors.length];
-    arr = counts[h];
+    const arr = counts[h];
     arr.forEach((v,i)=>{
       const x = 45 + (i*(340/13));
       const y = 280 - (v*(240/Math.max(1,max)));
@@ -187,7 +195,7 @@ async function renderTrends(){
 }
 
 function card(inner){ const d=document.createElement('div'); d.className='card'; d.innerHTML=inner; return d; }
-function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escapeHtml(s){ return s ? s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])) : ''; }
 
 async function onExport(){
   const rangeDays = 14;
