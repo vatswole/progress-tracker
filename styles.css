@@ -21,3 +21,6 @@ footer{padding:16px;text-align:center;color:#94a3b8}
 .export-row{margin-top:12px;display:flex;gap:8px;align-items:center}
 label.import{display:inline-flex;gap:8px;align-items:center;border:1px dashed #334155;padding:8px;border-radius:8px}
 .muted{color:#94a3b8}
+#gameplan h3{margin-top:16px}
+#gameplan ul{margin:8px 0 12px 18px}
+#gameplan .pill{display:inline-block;padding:4px 8px;border:1px solid #334155;border-radius:999px;margin:4px 6px 0 0;background:#0f172a;color:#e5e7eb;font-size:12px}

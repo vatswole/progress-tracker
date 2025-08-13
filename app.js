@@ -1,49 +1,114 @@
-// Minimal PWA app with IndexedDB storage via idb helper
+// PWA app with prepopulated plan + Game Plan tab
 'use strict';
 
-const DEFAULT_PLAN = {"version": 1, "generated_at": "2025-08-13T21:14:25.999067", "identity": {"statement": "I am a man who chooses connection with my wife over pixels.", "why": ["Be a present husband (1-year anniversary on Sep 7).", "Be a future father with discipline and self-respect.", "Build the lifestyle we want by reclaiming time, energy, and focus."]}, "dates": {"quit_date": "2025-09-05", "reboot_length_days": 30}, "habits": {"porn_cam": {"status": "eliminate", "rules": ["Full ban from Sep 5 for 30 days (no porn, no cams, no fetish browsing).", "Bathroom rule: no phone in bathroom; leave it outside every time.", "Laptop curfew: put laptop away at 11:00 pm.", "Thursdays alone: schedule out-of-home tasks during usual danger hours."], "urge_interrupts": ["20 push-ups OR 30 squats", "2-minute cold shower/face splash", "Drink a tall glass of water and walk for 2 minutes"], "notes": "Log every urge with trigger + intensity. Every slip is data, not shame."}, "gaming": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "No gaming after 11 pm thereafter if reintroduced.", "Move console/PC out of private zone."]}, "weed": {"status": "reduce", "rules": ["Cut daily intake by ~30–40% pre–Sep 5.", "From Sep 5: limit to 1–2x/week; no porn/gaming within 3 hours after use.", "Avoid pairing weed with boredom/late-night scrolling."]}, "shisha": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "If reintroduced, cap to rare social use; no solo-night sessions."]}}, "fetish_rewire": {"focus": ["cock worship", "cock shock"], "approach": ["No fetish content for the 30-day reboot.", "Week 2+: Gradually shift arousal focus to real-life connection (sensate focus exercises, eye contact, breathing).", "Thought labeling: when fetish images arise, label 'old loop' and redirect to breath + 5 senses.", "If needed, exposure hierarchy later (safe, consent-based, non-objectifying cues)."]}, "environment": {"tech": ["Install blockers on all devices (e.g., Pluckeye).", "Set accountability partner for password (spouse if aligned)."], "device_rules": ["Phone stays outside bathroom, 100% of the time.", "Laptop physically stored away at 11:00 pm."], "schedule_guards": ["Plan out-of-home work blocks on Thursdays when alone.", "Gym in late afternoon/early evening to reduce night-time energy spikes."]}, "daily_protocol": {"morning": ["5-minute breath + intention: read identity statement.", "Plan top 3 priorities for the day.", "Place phone outside bathroom before first shower/toilet."], "evening": ["Daily Review in app (sleep, energy, mood, workouts, wins, slips).", "Export coach_sync.json (share with coach).", "Laptop away at 11:00 pm; phone docked outside bedroom/bathroom."], "urge_playbook": ["Notice → Name the trigger → Do a 2-minute interrupt (push-ups/cold water/walk) → Log urge.", "If urge persists: leave room, change posture, water + chew gum, text spouse or coach message draft (not sent)."]}, "metrics": {"track": ["Urges per day + intensity", "Porn/cam events (target zero post–Sep 5)", "Gaming minutes (target zero for 30 days)", "Weed/shisha use", "Sleep (h), energy, mood, workouts"], "streaks": ["Porn/cam-free days", "Gaming-free days", "Shisha-free days"]}, "weekly_review": ["Identify top 2 triggers; design counter-moves for next week.", "Reinforce wins and refine device/schedule rules.", "Adjust weed reduction plan if it’s acting as a gateway."], "relapse_plan": ["Interrupt immediately (cold water, push-ups, leave room).", "Log what happened (trigger, time, device).", "Review blockers/curfews and add friction.", "Recommit to next action (not next week)."]};
+const DEFAULT_PLAN = {"version": 1, "generated_at": "2025-08-13T21:21:36.619129", "identity": {"statement": "I am a man who chooses connection with my wife over pixels.", "why": ["Be a present husband (1-year anniversary on Sep 7).", "Be a future father with discipline and self-respect.", "Build the lifestyle we want by reclaiming time, energy, and focus."]}, "dates": {"quit_date": "2025-09-05", "reboot_length_days": 30}, "habits": {"porn_cam": {"status": "eliminate", "rules": ["Full ban from Sep 5 for 30 days (no porn, no cams, no fetish browsing).", "Bathroom rule: no phone in bathroom; leave it outside every time.", "Laptop curfew: put laptop away at 11:00 pm.", "Thursdays alone: schedule out-of-home tasks during usual danger hours."], "urge_interrupts": ["20 push-ups OR 30 squats", "2-minute cold shower/face splash", "Drink a tall glass of water and walk for 2 minutes"], "notes": "Log every urge with trigger + intensity. Every slip is data, not shame."}, "gaming": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "No gaming after 11 pm thereafter if reintroduced.", "Move console/PC out of private zone."]}, "weed": {"status": "reduce", "rules": ["Cut daily intake by ~30–40% pre–Sep 5.", "From Sep 5: limit to 1–2x/week; no porn/gaming within 3 hours after use.", "Avoid pairing weed with boredom/late-night scrolling."]}, "shisha": {"status": "eliminate_30_days", "rules": ["Cold stop for 30 days starting Sep 5.", "If reintroduced, cap to rare social use; no solo-night sessions."]}}, "fetish_rewire": {"focus": ["cock worship", "cock shock"], "approach": ["No fetish content for the 30-day reboot.", "Week 2+: Gradually shift arousal focus to real-life connection (sensate focus exercises, eye contact, breathing).", "Thought labeling: when fetish images arise, label 'old loop' and redirect to breath + 5 senses.", "If needed, exposure hierarchy later (safe, consent-based, non-objectifying cues)."]}, "environment": {"tech": ["Install blockers on all devices (e.g., Pluckeye).", "Set accountability partner for password (spouse if aligned)."], "device_rules": ["Phone stays outside bathroom, 100% of the time.", "Laptop physically stored away at 11:00 pm."], "schedule_guards": ["Plan out-of-home work blocks on Thursdays when alone.", "Gym in late afternoon/early evening to reduce night-time energy spikes."]}, "daily_protocol": {"morning": ["5-minute breath + intention: read identity statement.", "Plan top 3 priorities for the day.", "Place phone outside bathroom before first shower/toilet."], "evening": ["Daily Review in app (sleep, energy, mood, workouts, wins, slips).", "Export coach_sync.json (share with coach).", "Laptop away at 11:00 pm; phone docked outside bedroom/bathroom."], "urge_playbook": ["Notice → Name the trigger → Do a 2-minute interrupt (push-ups/cold water/walk) → Log urge.", "If urge persists: leave room, change posture, water + chew gum, text spouse or coach message draft (not sent)."]}, "metrics": {"track": ["Urges per day + intensity", "Porn/cam events (target zero post–Sep 5)", "Gaming minutes (target zero for 30 days)", "Weed/shisha use", "Sleep (h), energy, mood, workouts"], "streaks": ["Porn/cam-free days", "Gaming-free days", "Shisha-free days"]}, "weekly_review": ["Identify top 2 triggers; design counter-moves for next week.", "Reinforce wins and refine device/schedule rules.", "Adjust weed reduction plan if it’s acting as a gateway."], "relapse_plan": ["Interrupt immediately (cold water, push-ups, leave room).", "Log what happened (trigger, time, device).", "Review blockers/curfews and add friction.", "Recommit to next action (not next week)."]};
 
-const TABS = ['log','urges','review','trends','settings'];
+const TABS = ['log','urges','review','trends','gameplan','settings'];
 const todayStr = () => new Date().toISOString().slice(0,10);
 
 async function ready(){
-  // PWA: register service worker
-  if ('serviceWorker' in navigator) {
-    try { await navigator.serviceWorker.register('service-worker.js'); } catch(e){}
-  }
+  if ('serviceWorker' in navigator) { try { await navigator.serviceWorker.register('service-worker.js'); } catch(e){} }
 
-  // Seed coach plan if none exists
+  // Seed plan if missing
   const hasPlan = await idb.get('coach_plan');
-  if(!hasPlan) {
-    await idb.set('coach_plan', DEFAULT_PLAN);
+  if(!hasPlan) { await idb.set('coach_plan', DEFAULT_PLAN); }
+
+  // Tab nav
+  document.querySelectorAll('nav button').forEach(btn=>btn.addEventListener('click',()=>showTab(btn.dataset.tab)));
+
+  // Load plan
+  const plan = await idb.get('coach_plan');
+  if(plan){ 
+    document.getElementById('coach-plan').textContent = JSON.stringify(plan,null,2); 
+    renderGamePlan(plan);
   }
 
-  // tab nav
-  document.querySelectorAll('nav button').forEach(btn=>{
-    btn.addEventListener('click',()=>showTab(btn.dataset.tab));
-  });
-
-  // load coach plan
-  const plan = await idb.get('coach_plan');
-  if(plan){ document.getElementById('coach-plan').textContent = JSON.stringify(plan,null,2); }
-
-  // forms
+  // Forms
   document.getElementById('log-form').addEventListener('submit', onSaveLog);
   document.getElementById('urge-form').addEventListener('submit', onSaveUrge);
   document.getElementById('daily-form').addEventListener('submit', onSaveDaily);
   document.getElementById('export-btn').addEventListener('click', onExport);
   document.getElementById('import-file').addEventListener('change', onImport);
 
-  // initial render
+  // Initial renders
   await renderToday();
   await renderLast7();
   await renderTrends();
 }
 
-function showTab(name){
-  TABS.forEach(t=>document.getElementById('tab-'+t).classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
+function showTab(name){ TABS.forEach(t=>document.getElementById('tab-'+t).classList.remove('active')); document.getElementById('tab-'+name).classList.add('active'); }
+
+function h(tag, cls, html){ const el=document.createElement(tag); if(cls) el.className=cls; if(html!==undefined) el.innerHTML=html; return el; }
+function list(items){ const ul=h('ul'); (items||[]).forEach(x=>ul.appendChild(h('li','',escapeHtml(x)))); return ul; }
+
+function renderGamePlan(plan){
+  const root = document.getElementById('gameplan');
+  root.innerHTML = '';
+
+  const head = h('div','card');
+  head.appendChild(h('h3','','Identity'));
+  head.appendChild(h('p','',`<em>${escapeHtml(plan.identity?.statement||'')}</em>`));
+  const why = h('div'); why.appendChild(h('h4','','Why')); why.appendChild(list(plan.identity?.why)); head.appendChild(why);
+  root.appendChild(head);
+
+  const dates = h('div','card');
+  dates.appendChild(h('h3','','Dates'));
+  dates.appendChild(h('p','',`Quit date: <strong>${escapeHtml(plan.dates?.quit_date||'')}</strong> • Reboot: <strong>${escapeHtml(String(plan.dates?.reboot_length_days||''))} days</strong>`));
+  root.appendChild(dates);
+
+  const habits = h('div','card');
+  habits.appendChild(h('h3','','Habits'));
+  Object.entries(plan.habits||{}).forEach(([k,v])=>{
+    const sec = h('div','');
+    sec.appendChild(h('h4','',titleCase(k.replace('_',' ')) + ` — <span class="pill">${escapeHtml(v.status||'')}</span>`));
+    if(v.rules){ sec.appendChild(list(v.rules)); }
+    if(v.urge_interrupts){ sec.appendChild(h('h5','','Urge interrupts')); sec.appendChild(list(v.urge_interrupts)); }
+    if(v.notes){ sec.appendChild(h('p','muted',escapeHtml(v.notes))); }
+    habits.appendChild(sec);
+  });
+  root.appendChild(habits);
+
+  const fetish = h('div','card');
+  fetish.appendChild(h('h3','','Fetish Rewire'));
+  if(plan.fetish_rewire?.focus){ 
+    const f = h('p','', 'Focus: ' + plan.fetish_rewire.focus.map(x=>`<span class="pill">${escapeHtml(x)}</span>`).join(' '));
+    fetish.appendChild(f);
+  }
+  fetish.appendChild(list(plan.fetish_rewire?.approach));
+  root.appendChild(fetish);
+
+  const env = h('div','card');
+  env.appendChild(h('h3','','Environment'));
+  env.appendChild(h('h4','','Tech')); env.appendChild(list(plan.environment?.tech));
+  env.appendChild(h('h4','','Device rules')); env.appendChild(list(plan.environment?.device_rules));
+  env.appendChild(h('h4','','Schedule guards')); env.appendChild(list(plan.environment?.schedule_guards));
+  root.appendChild(env);
+
+  const daily = h('div','card');
+  daily.appendChild(h('h3','','Daily Protocol'));
+  daily.appendChild(h('h4','','Morning')); daily.appendChild(list(plan.daily_protocol?.morning));
+  daily.appendChild(h('h4','','Evening')); daily.appendChild(list(plan.daily_protocol?.evening));
+  daily.appendChild(h('h4','','Urge playbook')); daily.appendChild(list(plan.daily_protocol?.urge_playbook));
+  root.appendChild(daily);
+
+  const metrics = h('div','card');
+  metrics.appendChild(h('h3','','Metrics & Streaks'));
+  metrics.appendChild(h('h4','','Track')); metrics.appendChild(list(plan.metrics?.track));
+  metrics.appendChild(h('h4','','Streaks')); metrics.appendChild(list(plan.metrics?.streaks));
+  root.appendChild(metrics);
+
+  const weekly = h('div','card');
+  weekly.appendChild(h('h3','','Weekly Review'));
+  weekly.appendChild(list(plan.weekly_review));
+  root.appendChild(weekly);
+
+  const relapse = h('div','card');
+  relapse.appendChild(h('h3','','Relapse Plan'));
+  relapse.appendChild(list(plan.relapse_plan));
+  root.appendChild(relapse);
 }
+
+function titleCase(s){ return (s||'').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' '); }
 
 async function onSaveLog(e){
   e.preventDefault();
@@ -146,7 +211,6 @@ async function renderLast7(){
 
 async function renderTrends(){
   const logs = (await idb.get('logs')) || [];
-  // Count events per day per habit over last 14 days
   const now = new Date();
   const days = [];
   for(let i=13;i>=0;i--){
@@ -160,21 +224,15 @@ async function renderTrends(){
     const idx = days.indexOf(x.date);
     if(idx>=0 && counts[x.habit]!=null){ counts[x.habit][idx] += 1; }
   });
-  // simple SVG-like line chart on canvas
   const canvas = document.getElementById('chart');
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  // axes
-  ctx.strokeStyle = '#94a3b8';
-  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(40,10); ctx.lineTo(40,280); ctx.lineTo(390,280); ctx.stroke();
-  // determine max
-  let max = 1;
-  Object.values(counts).forEach(arr=>arr.forEach(v=>{ if(v>max) max=v; }));
+  let max = 1; Object.values(counts).forEach(arr=>arr.forEach(v=>{ if(v>max) max=v; }));
   const colors = ['#22d3ee','#f59e0b','#ef4444','#10b981','#a78bfa'];
   habits.forEach((h,hi)=>{
-    ctx.beginPath();
-    ctx.strokeStyle = colors[hi%colors.length];
+    ctx.beginPath(); ctx.strokeStyle = colors[hi%colors.length];
     const arr = counts[h];
     arr.forEach((v,i)=>{
       const x = 45 + (i*(340/13));
@@ -183,49 +241,31 @@ async function renderTrends(){
     });
     ctx.stroke();
   });
-  // legend
-  ctx.fillStyle = '#e5e7eb';
-  ctx.font = '12px system-ui';
-  habits.forEach((h,hi)=>{
-    ctx.fillStyle = colors[hi%colors.length];
-    ctx.fillRect(50+hi*65, 10, 10, 10);
-    ctx.fillStyle = '#e5e7eb';
-    ctx.fillText(h, 65+hi*65, 20);
-  });
+  ctx.fillStyle = '#e5e7eb'; ctx.font = '12px system-ui';
+  habits.forEach((h,hi)=>{ ctx.fillStyle = colors[hi%colors.length]; ctx.fillRect(50+hi*65,10,10,10); ctx.fillStyle='#e5e7eb'; ctx.fillText(h,65+hi*65,20); });
 }
 
 function card(inner){ const d=document.createElement('div'); d.className='card'; d.innerHTML=inner; return d; }
 function escapeHtml(s){ return s ? s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])) : ''; }
 
 async function onExport(){
-  const rangeDays = 14;
-  const exported_at = new Date().toISOString();
-  const logs = (await idb.get('logs')) || [];
-  const urges = (await idb.get('urges')) || [];
-  const daily = (await idb.get('daily')) || [];
-  const bundle = {version:1, exported_at, range_days:rangeDays, logs, urges, daily};
+  const bundle = {
+    version: 1,
+    exported_at: new Date().toISOString(),
+    range_days: 14,
+    logs: (await idb.get('logs')) || [],
+    urges: (await idb.get('urges')) || [],
+    daily: (await idb.get('daily')) || []
+  };
   const blob = new Blob([JSON.stringify(bundle,null,2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'coach_sync.json';
-  a.click();
-  URL.revokeObjectURL(a.href);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'coach_sync.json'; a.click(); URL.revokeObjectURL(a.href);
 }
 
 async function onImport(ev){
-  const file = ev.target.files[0];
-  if(!file) return;
-  try{
-    const text = await file.text();
-    const plan = JSON.parse(text);
-    await idb.set('coach_plan', plan);
-    document.getElementById('coach-plan').textContent = JSON.stringify(plan,null,2);
-    document.getElementById('import-status').textContent = 'Coach plan imported.';
-  }catch(e){
-    document.getElementById('import-status').textContent = 'Import failed.';
-  }finally{
-    ev.target.value = '';
-  }
+  const file = ev.target.files[0]; if(!file) return;
+  try{ const text = await file.text(); const plan = JSON.parse(text); await idb.set('coach_plan', plan); document.getElementById('coach-plan').textContent = JSON.stringify(plan,null,2); renderGamePlan(plan); document.getElementById('import-status').textContent = 'Coach plan imported.'; }
+  catch(e){ document.getElementById('import-status').textContent = 'Import failed.'; }
+  finally{ ev.target.value = ''; }
 }
 
 document.addEventListener('DOMContentLoaded', ready);
